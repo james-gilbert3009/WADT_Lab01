@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+body {font-family: "Lato", sans-serif}
+.mySlides {display: none}
+
+
+.prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%; 
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.3s;
+            border-radius: 0 3px 3px 0;
+            user-select: non
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8); /* Darken buttons on hover */
+        }
+
+#p:hover{
+    background-color: rgb(126, 126, 126);
+}
+
+
+.vl {
+  border-left: 4px solid rgb(32, 32, 32);
+  height: 50px;
+  margin-right: 10px ;
+
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+        .slide-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.3s;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+            
+        }
+
+        #loading {
+            background: rgba(255, 255, 255, 0.8);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 9999;
+            display: none; /* Initially hidden */
+        }
+        
+        .payment-loader {
+            width: 150px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .payment-loader .pad {
+            width: 67px;
+            height: 45px;
+            border-radius: 8px;
+            border: 2px solid #00c4bd;
+            padding: 6px;
+            margin: 0 auto;
+        }
+
+        .payment-loader .chip {
+            width: 12px;
+            height: 8px;
+            background: #00c4bd;
+            border-radius: 3px;
+            margin-top: 4px;
+            margin-left: 3px;
+        }
+
+        .payment-loader .line {
+            width: 52px;
+            margin-top: 6px;
+            margin-left: 3px;
+            height: 4px;
+            background: #00c4bd;
+            border-radius: 100px;
+            opacity: 0;
+            animation: writeline 3s infinite ease-in;
+        }
+
+        .payment-loader .line2 {
+            width: 32px;
+            margin-top: 6px;
+            margin-left: 3px;
+            height: 4px;
+            background: #00c4bd;
+            border-radius: 100px;
+            opacity: 0;
+            animation: writeline2 3s infinite ease-in;
+        }
+
+        .payment-loader .loader-text {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #5f6571;
+            font-weight: bold;
+        }
+
+        @keyframes writeline {
+            0% { width: 0px; opacity: 0; }
+            33% { width: 52px; opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes writeline2 {
+            0% { width: 0px; opacity: 0; }
+            33% { width: 32px; opacity: 1; }
+            70% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+#success-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .success-modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .success-modal-content h2 {
+            color: #4CAF50;
+            font-size: 24px;
+        }
+
+        .success-modal-content p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .success-modal-content .close-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .success-modal-content .close-btn:hover {
+            background-color: #45a049;
+        }
+
+</style>
+
+
+<body>
+
+    <!-- Navbar -->
+    <div class="w3-top">
+    <div class="w3-bar w3-black w3-card">
+        <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+        <a href="#band" class="w3-bar-item w3-button w3-padding-large w3-hide-small">BAND</a>
+        <a href="#tour" class="w3-bar-item w3-button w3-padding-large w3-hide-small">TOUR</a>
+        <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
+        <div class="w3-dropdown-hover w3-hide-small">
+        <button class="w3-padding-large w3-button" title="More">MORE <i class="fa fa-caret-down"></i></button>     
+        <div class="w3-dropdown-content w3-bar-block w3-card-4">
+            <a href="#" class="w3-bar-item w3-button">Merchandise</a>
+            <a href="#" class="w3-bar-item w3-button">Extras</a>
+            <a href="#" class="w3-bar-item w3-button">Media</a>
+        </div>
+        </div>
+        <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
+    </div>
+    </div>
+
+    <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+    <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+    <a href="#band" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">BAND</a>
+    <a href="#tour" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">TOUR</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MERCH</a>
+    </div>
+
+    <!-- Page content -->
+    <div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+    <!-- Automatic Slideshow Images -->
+     <div class="slide-container">
+
+        <div class="container">
+
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+    <div class="mySlides w3-display-container w3-center" style="position: relative;">
+        <img src="https://www.w3schools.com/w3images/la.jpg" style="width:100%">
+        <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
+        <h3>Los Angeles</h3>
+        <p><b>We had the best time playing at Venice Beach!</b></p>   
+        </div>
+    </div>
+    <div class="mySlides w3-display-container w3-center">
+        <img src="https://www.w3schools.com/w3images/ny.jpg" style="width:100%">
+        <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
+        <h3>New York</h3>
+        <p><b>The atmosphere in New York is lorem ipsum.</b></p>    
+        </div>
+    </div>
+    <div class="mySlides w3-display-container w3-center">
+        <img src="https://www.w3schools.com/w3images/chicago.jpg" style="width:100%">
+        <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
+        <h3>Chicago</h3>
+        <p><b>Thank you, Chicago - A night we won't forget.</b></p>    
+        </div>
+    </div>
+        </div>
+
+    <a class="prev" onclick="showSlide(slideIndex - 1)">&#10094;</a>
+    <a class="next" onclick="showSlide(slideIndex + 1)">&#10095;</a>
+    </div>
+    </div>
+    </div>
+    
+
+    <!-- The Band Section -->
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+        <h2 class="w3-wide">THE BAND</h2>
+        <p style="color: rgb(150, 152, 153);"><i>We love music</i></p>
+
+   <hr style= "border-width: 1px; border-color: black;">
+
+        <p id="p" class="w3-justify" style="color: rgb(0, 0, 0); font-family: 'Times New Roman', Times, serif;">We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+        ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
+        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+       
+        <div class="w3-row w3-padding-32">
+
+        <div class="w3-third">
+            <p>Name</p>
+            <img src="https://www.w3schools.com/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+        </div>
+        <div class="w3-third">
+            <p>Name</p>
+            <img src="https://www.w3schools.com/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+        </div>
+        <div class="w3-third">
+            <p>Name</p>
+            <img src="https://www.w3schools.com/w3images/bandmember.jpg" class="w3-round" alt="Random Name" style="width:60%">
+        </div>
+        </div>
+    </div>
+
+    <!-- The Tour Section -->
+
+
+    
+        <div class="w3-container w3-grey" id="tour" >
+
+        <div class=" w3-content w3_center w3-padding-64 " style="max-width: 800px;">
+     
+            <div  class = " w3-content w3-center  " style=" display: flex; justify-content: center ;">
+            <div class="vl"></div>
+     
+        <h2 class="w3-wide w3-center">TOUR DATES</h2>
+      </div>
+
+      <p class="w3-opacity w3-center"><i>Remember to book your tickets!</i></p>
+        
+    
+    <hr>
+
+
+        <ul class="w3-ul w3-border w3-white w3-text-grey">
+            <li class="w3-padding">September <span class="w3-tag w3-red w3-round-large w3-margin-left ">Sold out</span></li>
+            <li class="w3-padding">October <span class="w3-tag w3-red w3-round-large w3-margin-left">Sold out</span></li>
+            <li class="w3-padding">November <span class="w3-badge w3-right w3-margin-right">3</span></li>
+        </ul>
+
+        <div class="w3-row-padding w3-padding-32" style="margin:0 -16px">
+            <div class="w3-third w3-margin-bottom">
+            <img src="https://www.w3schools.com/w3images/newyork.jpg" alt="New York" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+                <p><b>New York</b></p>
+                <p class="w3-opacity">Fri 27 Nov 2016</p>
+                <p>Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
+                <button class="w3-button w3-black w3-margin-bottom" onclick="document.getElementById('ticketModal').style.display='block'">Buy Tickets</button>
+            </div>
+            </div>
+            <div class="w3-third w3-margin-bottom">
+            <img src="https://www.w3schools.com/w3images/paris.jpg" alt="Paris" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+                <p><b>Paris</b></p>
+                <p class="w3-opacity">Sat 28 Nov 2016</p>
+                <p>Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
+                <button class="w3-button w3-black w3-margin-bottom" onclick="document.getElementById('ticketModal').style.display='block'">Buy Tickets</button>
+            </div>
+            </div>
+            <div class="w3-third w3-margin-bottom">
+            <img src="https://www.w3schools.com/w3images/sanfran.jpg" alt="San Francisco" style="width:100%" class="w3-hover-opacity">
+            <div class="w3-container w3-white">
+                <p><b>San Francisco</b></p>
+                <p class="w3-opacity">Sun 29 Nov 2016</p>
+                <p>Praesent tincidunt sed tellus ut rutrum sed vitae justo.</p>
+                <button class="w3-button w3-black w3-margin-bottom" onclick="document.getElementById('ticketModal').style.display='block'">Buy Tickets</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+   
+
+    <!-- Ticket Modal -->
+    <div id="ticketModal" class="w3-modal">
+        <div class="w3-modal-content w3-animate-top w3-card-4">
+        <header class="w3-container w3-teal w3-center w3-padding-32"> 
+            <span onclick="document.getElementById('ticketModal').style.display='none'" 
+        class="w3-button w3-teal w3-xlarge w3-display-topright">×</span>
+            <h2 class="w3-wide"><i class="fa fa-suitcase w3-margin-right"></i>Tickets</h2>
+        </header>
+        <div class="w3-container">
+            <p><label><i class="fa fa-shopping-cart"></i> Tickets, $15 per person</label></p>
+            <input class="w3-input w3-border" type="text" placeholder="How many?">
+            <p><label><i class="fa fa-user"></i> Send To</label></p>
+            <input class="w3-input w3-border" type="text" placeholder="Enter email">
+            <button class="w3-button w3-block w3-teal w3-padding-16 w3-section w3-right" onclick="showPaymentLoader()" >PAY <i class="fa fa-check"></i></button>
+            <button class="w3-button w3-red w3-section" onclick="document.getElementById('ticketModal').style.display='none'">Close <i class="fa fa-remove"></i></button>
+            <p class="w3-right">Need <a href="#" class="w3-text-blue">help?</a></p>
+        </div>
+        </div>
+    </div>
+
+    <!--payment page-->
+
+    <div id="loading">
+        <div class="payment-loader">
+        
+            <div class="pad">
+                <div class="chip"></div>
+                <div class="line line1"></div>
+                <div class="line line2"></div>
+            </div>
+            <div class="loader-text">Processing Payment...</div>
+        </div>
+    </div>
+
+
+    <!-- Success Modal -->
+    <div id="success-modal">
+        <div class="success-modal-content">
+            <h2>Payment Successful</h2>
+            <p>Your transaction has been completed successfully.</p>
+            <button class="close-btn" onclick="closeSuccessModal()">Close</button>
+        </div>
+    </div>
+    
+    
+    <!-- The Contact Section -->
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
+        <h2 class="w3-wide w3-center">CONTACT</h2>
+        <p class="w3-opacity w3-center"><i>Fan? Drop a note!</i></p>
+        <div class="w3-row w3-padding-32">
+        <div class="w3-col m6 w3-large w3-margin-bottom">
+            <i class="fa fa-map-marker" style="width:30px"></i> Chicago, US<br>
+            <i class="fa fa-phone" style="width:30px"></i> Phone: +00 151515<br>
+            <i class="fa fa-envelope" style="width:30px"> </i> Email: mail@mail.com<br>
+        </div>
+        <div class="w3-col m6">
+            <form action="/action_page.php" target="_blank">
+            <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+                <div class="w3-half">
+                <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+                </div>
+                <div class="w3-half">
+                <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+                </div>
+            </div>
+            <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+            <button class="w3-button w3-black w3-section w3-right" type="submit">SEND</button>
+            </form>
+        </div>
+        </div>
+
+    
+    <!-- End Page Content -->
+    </div>
+
+    <!-- Image of location/map -->
+    <img src="https://www.w3schools.com/w3images/map.jpg" class="w3-image w3-greyscale-min" style="width:100%">
+
+    <!-- Footer -->
+    <footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    </footer>
+
+    <script>
+    // Automatic Slideshow - change image every 4 seconds
+    let slideIndex = 1;  // Start with the first slide
+    let carouselTimer;   // Define the timer variable
+
+// Function to automatically cycle through slides
+function carousel() {
+    const slides = document.getElementsByClassName("mySlides");
+
+    // Hide all slides
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    // Advance slide index
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1; }
+
+    // Display the current slide
+    slides[slideIndex - 1].style.display = "block";
+
+    // Set the timer for the next slide change
+    carouselTimer = setTimeout(carousel, 4000); // Change every 4 seconds
+}
+
+// Function to manually show a specific slide
+function showSlide(n) {
+    const slides = document.getElementsByClassName("mySlides");
+
+    // Clear the current carousel timer to prevent immediate automatic advancement
+    clearTimeout(carouselTimer);
+
+    // Set slideIndex based on manual input
+    slideIndex = n;
+
+    // Wrap around if the slide index is out of bounds
+    if (slideIndex > slides.length) { slideIndex = 1; }
+    if (slideIndex < 1) { slideIndex = slides.length; }
+
+    // Hide all slides
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    // Display the chosen slide
+    slides[slideIndex - 1].style.display = "block";
+
+    // Restart the automatic carousel after manual change
+    carouselTimer = setTimeout(carousel, 4000);
+}
+
+// Initialize the carousel on page load
+carousel();
+
+
+    // Used to toggle the menu on small screens when clicking on the menu button
+    function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+    }
+
+   
+
+
+    // When the user clicks anywhere outside of the modal, close it
+    var modal = document.getElementById('ticketModal');
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+    
+ 
+    //when user click outside the payment page, close it.
+    var payment = document.getElementById('id01');
+   
+    if (event.target == payment) {
+        payment.style.display = "none";
+    }
+}
+
+function showPaymentLoader() {
+            // Display the loader
+            const loader = document.getElementById('loading');
+            loader.style.display = 'block';
+
+            // Simulate a loading time for processing payment
+            setTimeout(() => {
+                // Hide loader and show the success modal
+                loader.style.display = 'none';
+                showSuccessModal();
+            }, 3000); // Adjust timing as necessary
+        }
+
+        function showSuccessModal() {
+            // Display the success modal
+            const modal = document.getElementById('success-modal');
+            modal.style.display = 'block';
+        }
+
+        function closeSuccessModal() {
+            // Close the modal
+            const modal = document.getElementById('success-modal');
+            modal.style.display = 'none';
+        }
+    
+    
+    </script>
+
+    </body>
+</html>
